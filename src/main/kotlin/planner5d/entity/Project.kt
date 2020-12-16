@@ -3,7 +3,6 @@ package planner5d.entity
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.OneToOne
 
 // https://spring.io/guides/tutorials/spring-boot-kotlin/
 @Entity
@@ -15,13 +14,20 @@ class Project(
 
     var link: String?,
     var hash: String?,
-    @OneToOne
+    var title: String?,
+    var aboutContents: String,
+
+    var numFloors: Int,
+    var numRooms: Int,
+    var numOtherItems: Int,
+
+    var hits: Int,
+
+    /*@OneToOne
     var thumbnail: ProjectThumbnail,
 
     @OneToOne
-    var stats: ProjectStats,
-
-    var aboutContents: String
+    var stats: ProjectStats,*/
 ) {
 
     override fun toString(): String {

@@ -11,20 +11,18 @@ class ProjectDetailsParser(private val projectDenormalizer: ProjectDenormalizer)
 
     fun parseHtml(html: Document, project: Project, baseUrl: String): Project {
 
-        project.aboutContents = html.select(".is-7-tablet-portrait > p:nth-child(12)").text()
         val key = parseProjectKey(html)
+
+        project.aboutContents = html.select(".is-7-tablet-portrait > p:nth-child(12)").text()
         project.hash = key
 
         val url = "$baseUrl/api/project/$key"
         val data = java.net.URL(url).readText()
 
-        val parsedProject = projectDenormalizer.denormalize(
+        return projectDenormalizer.denormalize(
             Gson().fromJson(data, ProjectData::class.java),
             project
         )
-
-        // do other stuff here with parsedProject
-        return parsedProject
     }
 
     private fun parseProjectKey(html: Document): String {
