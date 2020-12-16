@@ -1,8 +1,6 @@
 package planner5d.entity
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 // https://spring.io/guides/tutorials/spring-boot-kotlin/
 @Entity
@@ -23,11 +21,13 @@ class Project(
 
     var hits: Int,
 
-    /*@OneToOne
+    // `cascade` option must be set in order to save this relationship data successfully
+    @OneToOne(cascade = [CascadeType.ALL])
     var thumbnail: ProjectThumbnail,
 
-    @OneToOne
-    var stats: ProjectStats,*/
+    // `cascade` option must be set in order to save this relationship data successfully
+    @OneToOne(cascade = [CascadeType.ALL])
+    var stats: ProjectStats,
 ) {
 
     override fun toString(): String {

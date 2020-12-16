@@ -14,8 +14,8 @@ class ProjectsParser {
         return html.select("div.card.ideas-card").map { divCardIdeasCard ->
             Project(
                 link = divCardIdeasCard.select("a.card-image.image").attr("href"),
-                // thumbnail = parseThumbnail(divCardIdeasCard),
-                // stats = parseStats(divCardIdeasCard),
+                thumbnail = parseThumbnail(divCardIdeasCard),
+                stats = parseStats(divCardIdeasCard),
                 hash = "",
                 aboutContents = "",
                 title = "",
