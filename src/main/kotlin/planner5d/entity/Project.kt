@@ -2,6 +2,9 @@ package planner5d.entity
 
 import javax.persistence.*
 
+// https://stackoverflow.com/questions/1298322/wrong-ordering-in-generated-table-in-jpa
+// ```Hibernate generates columns in alphabetical order.```
+
 // https://spring.io/guides/tutorials/spring-boot-kotlin/
 @Entity
 class Project(
