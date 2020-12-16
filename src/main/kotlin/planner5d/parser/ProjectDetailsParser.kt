@@ -1,11 +1,13 @@
 package planner5d.parser
 
+import com.google.gson.Gson
 import org.jsoup.nodes.Document
 import org.springframework.stereotype.Component
+import planner5d.ProjectDenormalizer
 import planner5d.entity.Project
 
 @Component
-class ProjectDetailsParser {
+class ProjectDetailsParser(private val projectDenormalizer: ProjectDenormalizer) {
 
     fun parseHtml(html: Document, project: Project, baseUrl: String): Project {
 
@@ -13,9 +15,16 @@ class ProjectDetailsParser {
         val key = parseProjectKey(html)
         project.hash = key
 
-        // val data = downloadProjectData(key, baseUrl)
+        val url = "$baseUrl/api/project/$key"
+        val data = java.net.URL(url).readText()
 
-        return project
+        val parsedProject = projectDenormalizer.denormalize(
+            Gson().fromJson(data, ProjectData::class.java),
+            project
+        )
+
+        // do other stuff here with parsedProject
+        return parsedProject
     }
 
     private fun parseProjectKey(html: Document): String {
@@ -28,19 +37,22 @@ class ProjectDetailsParser {
         return result.groupValues[1]
     }
 
-    private fun downloadProjectData(key: String, baseUrl: String): String {
-
-        val url = "$baseUrl/api/project/$key"
-        return java.net.URL(url).readText()
-    }
 }
 
 
-class MineUserEntity {
+data class ProjectData(
+    val storage: String = "",
+    val copyright: String = "",
+    val items: List<Items>,
+)
 
-    data class Items(
-        val cdate: String,
-        val udate: String,
-        val hash: String,
-    )
-}
+data class Items(
+    val name: String?,
+    val hash: String?,
+    val data: Item?
+)
+
+data class Item(
+    val className: String?,
+    val items: List<Item>?,
+)

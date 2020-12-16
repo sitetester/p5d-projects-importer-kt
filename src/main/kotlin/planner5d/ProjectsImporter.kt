@@ -19,6 +19,7 @@ class ProjectsImporter(
     private val baseUrl = "https://planner5d.com"
 
     fun import(page: Int = 1, maxPages: Int = 5): Boolean {
+        return true
 
         val url = this.baseUrl + "/gallery/floorplans?page=" + page
         val html = Jsoup.connect(url).get()
