@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+
+<style>
+    table, td, th thead {
+        border: 1px solid gray;
+    }
+
+
+
+</style>
+
+<table>
+
+    <tr>
+        <th>Sr. #</th>
+        <th>Thumbnail</th>
+        <th>Title</th>
+        <th>Num Views</th>
+        <th>Floors</th>
+        <th>Rooms</th>
+        <th>Other items</th>
+    </tr>
+
+    <tr th:each="project : ${projects}">
+        <td>-</td>
+        <td><img height="25%" th:src="${project.thumbnail.src}" width="25%"/></td>
+
+        <td th:text="${project.title}"/>
+        <td th:text="${project.stats.numViews}"/>
+        <td th:text="${project.numFloors}"/>
+        <td th:text="${project.numRooms}"/>
+        <td th:text="${project.numOtherItems}"/>
+
+    </tr>
+
+</table>
+
+</body>
+</html>
