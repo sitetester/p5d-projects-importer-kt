@@ -1,0 +1,2 @@
+- It launches multiple coroutines to parse data in parallel HTTP requests fashion
+- Projects listing page is accessible at `/projects` 
