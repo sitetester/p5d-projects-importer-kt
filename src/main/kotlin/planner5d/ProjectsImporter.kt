@@ -15,7 +15,7 @@ import planner5d.parser.ProjectsParser
 class ProjectsImporter(
     private val sessionFactory: SessionFactory,
     private val projectsParser: ProjectsParser,
-    private val priProjectDetailsParser: ProjectDetailsParser
+    private val projectDetailsParser: ProjectDetailsParser
 ) {
 
     private val baseUrl = "https://planner5d.com"
@@ -33,7 +33,7 @@ class ProjectsImporter(
 
                 GlobalScope.async {
                     val projectDetailsHtml: Document = Jsoup.connect(url).get()
-                    priProjectDetailsParser.parseHtml(projectDetailsHtml, parsedProject, baseUrl)
+                    projectDetailsParser.parseHtml(projectDetailsHtml, parsedProject, baseUrl)
                 }
             }
 
